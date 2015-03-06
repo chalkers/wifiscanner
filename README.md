@@ -4,4 +4,7 @@ A simple Node.js WiFi Scanner.
 
 ## To dos
 
-* Windows Support
+* Implement parsers for Linux and Mac to return JSON objects
+* Windows Support - windows adapter and parser
+* Finish Module Interface
+* Add tests
