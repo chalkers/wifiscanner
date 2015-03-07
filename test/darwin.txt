@@ -1,0 +1,7 @@
+                            SSID BSSID             RSSI CHANNEL HT CC SECURITY (auth/unicast/group)
+                     myqeast9966 40:4a:03:be:53:cb -82  11      N  -- WPA(PSK/AES,TKIP/TKIP) WPA2(PSK/AES,TKIP/TKIP)
+                        freewifi ce:03:fa:65:e5:be -78  6       Y  -- NONE
+                       HOME-E5AD cc:03:fa:65:e5:bc -76  6       Y  -- WPA(PSK/AES,TKIP/TKIP) WPA2(PSK/AES,TKIP/TKIP)
+                         pchome9 e0:91:f5:af:8d:d8 -80  2       Y  US WPA2(PSK/AES/AES)
+                        ACLCICHC 6c:b0:ce:44:e9:41 -48  1       Y  -- WPA2(PSK/AES/AES)
+                        freewifi e6:3e:fc:db:fb:f0 -84  1       Y  US NONE

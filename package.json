@@ -17,6 +17,7 @@
     "test": "mocha test"
   },
   "devDependencies": {
+    "chai": "^2.1.1",
     "mocha": "*"
   },
   "licenses": [
@@ -25,5 +26,5 @@
       "url": "https://github.com/chalkers/wifiscanner/blob/master/LICENSE"
     }
   ],
-  "main": "index"
+  "main": "lib/wifiscanner"
 }
