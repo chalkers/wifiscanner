@@ -2,7 +2,7 @@
 
 A simple Node.js WiFi Scanner for Mac and Linux. Works great on embedded devices like the Raspberry Pi.
 
-##Usage
+## Usage
 
 ```javascript
 var wifiscanner = require("wifiscanner");
