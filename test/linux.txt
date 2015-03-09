@@ -81,4 +81,6 @@ wlan0     Scan completed :
                         Authentication Suites (1) : PSK
                     Quality=39/100  Signal level=43/100  
 
+lo        Interface doesn't support scanning.
 
+eth0      Interface doesn't support scanning.
