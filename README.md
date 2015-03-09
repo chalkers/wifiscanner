@@ -1,5 +1,7 @@
 # WiFi Scanner
 
+[![Build Status](https://travis-ci.org/chalkers/wifiscanner.svg?branch=master)](https://travis-ci.org/chalkers/wifiscanner)
+
 A simple Node.js WiFi Scanner for Mac and Linux. Works great on embedded devices like the Raspberry Pi.
 
 ## Usage
