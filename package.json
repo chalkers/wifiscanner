@@ -1,6 +1,6 @@
 {
   "author": "Andrew Chalkley <andrew@chalkley.org> (http://forefront.io)",
-  "name": "WifiScanner",
+  "name": "wifiscanner",
   "description": "A simple Node.js WiFi Scanner",
   "keywords": [
     "wifi",
