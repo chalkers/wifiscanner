@@ -142,11 +142,7 @@ var options = {
 var scanner = wifiscanner(options);
 
 scanner.scan(function(error, networks){
-    if(error) {
-        console.error(error);
-    } else {
-        console.dir(networks);
-    }
+    //...
 }, function(standardError){
     console.error(standardError);
 });
