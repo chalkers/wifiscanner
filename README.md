@@ -127,7 +127,7 @@ eth0      Interface doesn't support scanning.
 ```
 
 The default behavior from this module is to do nothing. However, you can pass in a second _optional_ callback to the
-scan method and do what you want with it.
+`scan` method and do what you want with it.
 
 ```javascript
 var wifiscanner = require("wifiscanner");
