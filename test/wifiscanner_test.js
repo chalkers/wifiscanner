@@ -58,12 +58,22 @@ describe("WifiScanner", function(){
         });
 
         it("on a linux", function(done){
-            var scanner = wifiscanner({platform: "linux", args:"./test/linux.txt", binaryPath: "cat"});
+            var scanner = wifiscanner({platform: "linux", args:"./test/linux.stdout.txt", binaryPath: "cat"});
 
             assert.isTrue(scanner instanceof LinuxWifiScanner, "Scanner returned by wifiscanner should be a DawrinWifiScanner");
 
             scanner.scan(function(error, networks) {
                 crossPlatformTest(error, networks, done)
+            });
+        });
+
+        it("should handle standard errors", function(done){
+            var scanner = wifiscanner({platform: "linux", binaryPath: "./test/iwlist_mock.js"});
+            scanner.scan(function(error, networks) {
+
+            }, function(standardError){
+                assert.typeOf(standardError, 'string');
+                done();
             });
         });
     });

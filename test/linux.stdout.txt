@@ -79,8 +79,4 @@ wlan0     Scan completed :
                         Group Cipher : TKIP
                         Pairwise Ciphers (2) : CCMP TKIP
                         Authentication Suites (1) : PSK
-                    Quality=39/100  Signal level=43/100  
-
-lo        Interface doesn't support scanning.
-
-eth0      Interface doesn't support scanning.
+                    Quality=39/100  Signal level=43/100

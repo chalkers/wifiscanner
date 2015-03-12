@@ -1,0 +1,4 @@
+
+lo        Interface doesn't support scanning.
+
+eth0      Interface doesn't support scanning.
