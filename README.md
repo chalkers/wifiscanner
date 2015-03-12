@@ -45,7 +45,7 @@ Network is an `Array` of nearby networks. Each network will have the following k
 
 ### JSON Sample Output
 
-```json
+```
 [
     {
         ssid: 'ACLCICHCGC',
