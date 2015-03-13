@@ -25,6 +25,11 @@ var NETWORKS = [
         mac: '40:4a:03:be:53:1e',
         channel: '11',
         security: [ 'WPA', 'WPA2' ] },
+    {
+        ssid: "PP-Print-11-Officejet Pro 8600",
+        mac: "e4:5d:36:3f:71:19",
+        channel: "6",
+        security: [ "None" ] },
     {   ssid: 'pchome9',
         mac: 'e0:91:f5:af:8d:1e',
         channel: '2',
@@ -40,8 +45,8 @@ function sortBySSIDs(network,otherNetowrk) {
 
 function crossPlatformTest(error, networks, done) {
     assert.isArray(networks, "should be an array");
-    assert.lengthOf(networks, 6, "The networks array should be 6 in length");
-    assert.deepEqual(networks.sort(sortBySSIDs), NETWORKS, "Networks were not as expected");
+    assert.lengthOf(networks, 7, "The networks array should be 7 in length");
+    assert.deepEqual(networks.sort(sortBySSIDs), NETWORKS.sort(sortBySSIDs), "Networks were not as expected");
     done();
 }
 

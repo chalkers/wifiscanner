@@ -5,3 +5,4 @@
                          pchome9 e0:91:f5:af:8d:1e -80  2       Y  US WPA2(PSK/AES/AES)
                       ACLCICHCGC 6c:b0:ce:44:e9:1e -48  1       Y  -- WPA2(PSK/AES/AES)
                         insecure e6:3e:fc:db:fb:1e -84  1       Y  US NONE
+  PP-Print-11-Officejet Pro 8600 e4:5d:36:3f:71:19 -73  6       N  -- NONE

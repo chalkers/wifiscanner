@@ -80,3 +80,11 @@ wlan0     Scan completed :
                         Pairwise Ciphers (2) : CCMP TKIP
                         Authentication Suites (1) : PSK
                     Quality=39/100  Signal level=43/100
+          Cell 07 - Address: E4:5D:36:3F:71:19
+                    ESSID:"PP-Print-11-Officejet Pro 8600"
+                    Protocol:IEEE 802.11bgn
+                    Mode:Master
+                    Frequency:2.412 GHz (Channel 6)
+                    Encryption key:off
+                    Bit Rates:270 Mb/s
+                    Quality:50  Signal level:0  Noise level:0
