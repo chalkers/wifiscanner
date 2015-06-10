@@ -35,5 +35,5 @@
       "url": "https://github.com/chalkers/wifiscanner/raw/master/LICENCE"
     }
   ],
-  "main": "lib/wifiscanner"
+  "main": "lib/index.js"
 }
