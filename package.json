@@ -11,7 +11,7 @@
     "raspberry pi",
     "beagle bone"
   ],
-  "version": "0.0.4",
+  "version": "0.0.5",
   "engines": {
     "node": ">=0.10"
   },
@@ -25,7 +25,7 @@
     "typescript": "^1.5.0-beta"
   },
   "devDependencies": {
-    "chai": "^2.3.0",
+    "chai": "^3.0.0",
     "mocha": "^2.2.5",
     "istanbul": "^0.3.14"
   },

@@ -2,7 +2,7 @@
 
 export default class LinuxWifiScanner implements PlatformScanner {
     constructor(public options) {
-        
+        this.options = options || {};
     }
     
     get binaryPath() {

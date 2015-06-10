@@ -1,8 +1,9 @@
 /// <reference path="./interfaces/platformscanner" />
 
 export default class DarwinWifiScanner implements PlatformScanner {
+
     constructor(public options) {
-        
+        this.options = options || {};
     }
     get binaryPath() {
         return this.options.binaryPath || "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport";
