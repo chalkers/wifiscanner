@@ -16,8 +16,13 @@
     "node": ">=0.10"
   },
   "scripts": {
+    "pretest": "./node_modules/.bin/tsc",
     "test": "mocha test",
-    "test:coverage": "./node_modules/.bin/istanbul cover _mocha"
+    "test:coverage": "./node_modules/.bin/istanbul cover _mocha",
+    "postinstall": "tsc"
+  },
+  "dependencies": {
+    "typescript": "^1.5.0-beta"
   },
   "devDependencies": {
     "chai": "^2.3.0",

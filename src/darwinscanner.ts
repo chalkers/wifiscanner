@@ -6,21 +6,20 @@ export default class DarwinWifiScanner implements PlatformScanner {
     }
     get binaryPath() {
         return this.options.binaryPath || "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport";
-    };
+    }
     
     parse(data) {
         var lines = data.split("\n");
         var headers = lines.shift();
         var indexOfMacAddress = headers.indexOf("BSSID");
-        var networks = lines.filter(filterBlanks).map(function(line){
+        return lines.filter(filterBlanks).map(function(line){
             return parseLine(line, indexOfMacAddress);
         });
-        return networks;
-    };
+    }
     
     get args() {
         return this.options.args || "-s";
-    };
+    }
 }
 
 function cleanSecurity(security) {
@@ -48,13 +47,11 @@ function parseLine(line, indexOfMacAddress): WirelessNetwork {
     //[4] HT
     //[5] CC
     //[6..x] SECURITY (auth/unicast/group)
-    
-    var network = {
+
+    return {
         ssid: ssid,
         mac: components[0].toLowerCase(),
         channel: components[2],
         security: components.splice(5).map(cleanSecurity).sort()
     };
-    
-    return network;
 }

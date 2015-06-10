@@ -13,7 +13,7 @@ export default class WifiScanner {
             }
             callback(error, this.platformScanner.parse(standardOut.toString()));
         });
-    };
+    }
 	
 	get command() {
 		return this.platformScanner.binaryPath + " " + this.platformScanner.args;

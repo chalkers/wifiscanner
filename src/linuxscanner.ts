@@ -7,7 +7,7 @@ export default class LinuxWifiScanner implements PlatformScanner {
     
     get binaryPath() {
         return this.options.binaryPath || "/sbin/iwlist";
-    };
+    }
     
     parse(data) {
         var cells = data.split(/Cell \d{2} - /g);
@@ -15,11 +15,11 @@ export default class LinuxWifiScanner implements PlatformScanner {
             cells.shift();
         }
         return cells.map(parseCell);
-    };
+    }
     
     get args() {
         return this.options.args || "scan";
-    };
+    }
 }
 
 function cleanCellLine(cellLine) {
@@ -29,14 +29,12 @@ function cleanCellLine(cellLine) {
 function parseCell(cell): WirelessNetwork {
     var cellLines = cell.split("\n").map(cleanCellLine);
 
-    var network: WirelessNetwork = {
-        ssid: cellLines.filter(findSsid).map(extractSsid)[0],
-        mac: cellLines.filter(findMac).map(extractMac)[0],
-        channel: cellLines.filter(findChannel).map(extractChannel)[0],
-        security: cellLines.filter(findSecurity).map(extractSecurity)          
+    return {
+        ssid:       cellLines.filter(findSsid).map(extractSsid)[0],
+        mac:        cellLines.filter(findMac).map(extractMac)[0],
+        channel:    cellLines.filter(findChannel).map(extractChannel)[0],
+        security:   cellLines.filter(findSecurity).map(extractSecurity)
     };
-    
-    return network;
 }
 
 function findMac(line){
