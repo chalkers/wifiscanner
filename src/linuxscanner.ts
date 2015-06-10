@@ -1,41 +1,41 @@
-var CoreScanner = require("./core");
+/// <reference path="./interfaces/platformscanner" />
 
-function LinuxWifiScanner(options) {
-    this.options = options || {};
-}
-
-LinuxWifiScanner.prototype = Object.create(CoreScanner.prototype);
-
-LinuxWifiScanner.prototype.binaryPath = function binaryPath() {
-    return this.options.binaryPath || "/sbin/iwlist";
-};
-
-LinuxWifiScanner.prototype.parse = function parse(data) {
-    var cells = data.split(/Cell \d{2} - /g);
-    if(~cells[0].toLocaleLowerCase().indexOf("scan complete")) {
-        cells.shift();
+export default class LinuxWifiScanner implements PlatformScanner {
+    constructor(public options) {
+        
     }
-    return cells.map(parseCell);
-};
-
-LinuxWifiScanner.prototype.args = function args() {
-    return this.options.args || "scan";
-};
-
-module.exports = LinuxWifiScanner;
+    
+    get binaryPath() {
+        return this.options.binaryPath || "/sbin/iwlist";
+    };
+    
+    parse(data) {
+        var cells = data.split(/Cell \d{2} - /g);
+        if(~cells[0].toLocaleLowerCase().indexOf("scan complete")) {
+            cells.shift();
+        }
+        return cells.map(parseCell);
+    };
+    
+    get args() {
+        return this.options.args || "scan";
+    };
+}
 
 function cleanCellLine(cellLine) {
     return cellLine.trim();
 }
 
-function parseCell(cell){
+function parseCell(cell): WirelessNetwork {
     var cellLines = cell.split("\n").map(cleanCellLine);
 
-    var network = {};
-    network.ssid = cellLines.filter(findSsid).map(extractSsid)[0];
-    network.mac = cellLines.filter(findMac).map(extractMac)[0];
-    network.channel = cellLines.filter(findChannel).map(extractChannel)[0];
-    network.security = cellLines.filter(findSecurity).map(extractSecurity);
+    var network: WirelessNetwork = {
+        ssid: cellLines.filter(findSsid).map(extractSsid)[0],
+        mac: cellLines.filter(findMac).map(extractMac)[0],
+        channel: cellLines.filter(findChannel).map(extractChannel)[0],
+        security: cellLines.filter(findSecurity).map(extractSecurity)          
+    };
+    
     return network;
 }
 
