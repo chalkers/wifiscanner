@@ -3,7 +3,8 @@
 var childProcess = require("child_process");
 
 export default class WifiScanner implements PlatformScanner {
-	constructor(public options: WifiScannerOptions) {
+	options: WifiScannerOptions;
+    constructor(options: WifiScannerOptions) {
         this.options = options || {};
 	}	
 	scan(callback, standardErrorCallback) {
