@@ -1,8 +1,8 @@
 /// <reference path="../typings/node/node.d.ts" />
 ///<reference path="interfaces.ts"/>
 
-import DarwinWifiScanner from "./darwinscanner"
-import LinuxWifiScanner from "./linuxscanner"
+import DarwinWifiScanner from "./scanners/darwinscanner"
+import LinuxWifiScanner from "./scanners/linuxscanner"
 
 function platformSelect(options): string {
     var platform: string;

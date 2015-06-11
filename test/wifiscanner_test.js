@@ -1,8 +1,8 @@
 var assert = require("chai").assert;
 
 var wifiscanner = require("../lib/"),
-    DarwinWifiScanner = require("../lib/darwinscanner").default,
-    LinuxWifiScanner = require("../lib/linuxscanner").default;
+    DarwinWifiScanner = require("../lib/scanners/darwinscanner").default,
+    LinuxWifiScanner = require("../lib/scanners/linuxscanner").default;
 
 var NETWORKS = [
     {   ssid: 'ACLCICHCGC',

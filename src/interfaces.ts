@@ -4,10 +4,7 @@ interface WifiScannerOptions {
 }
 
 interface PlatformScanner {
-    options: Object;
-    binaryPath: string;
-    parse(data: string): Array<WirelessNetwork>;
-    args: string;
+    parse: (data: string) => Array<WirelessNetwork>;
 }
 
 interface WirelessNetwork {

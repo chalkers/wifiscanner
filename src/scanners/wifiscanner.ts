@@ -1,4 +1,4 @@
-/// <reference path="../typings/node/node.d.ts" />
+/// <reference path="../../typings/node/node.d.ts" />
 
 var childProcess = require("child_process");
 
@@ -8,7 +8,7 @@ export default class WifiScanner implements PlatformScanner {
 	}	
 	scan(callback, standardErrorCallback) {
         childProcess.exec(this.command,  (error, standardOut, standardError) => {
-            if (typeof standardErrorCallback === "function" && standardError) {
+            if (standardError && typeof standardErrorCallback === "function") {
                 standardErrorCallback(standardError);
             }
             callback(error, this.parse(standardOut.toString()));
@@ -16,18 +16,11 @@ export default class WifiScanner implements PlatformScanner {
     }
 	
 	get command() {
-		return this.binaryPath + " " + this.args;
+		return this.options.binaryPath + " " + this.options.args;
 	}
 
-    get binaryPath() {
-        return this.options.binaryPath;
-    }
-
-    get args() {
-        return this.options.args;
-    }
-
     parse(data) {
+        throw Error("Please override this in 'subclass'.");
         return [];
     }
 }

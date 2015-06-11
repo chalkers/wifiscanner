@@ -2,7 +2,9 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"outDir": "lib/",
-		"target": "ES5"
+		"target": "ES5",
+		"sourceMap": true,
+		"removeComments": true
 	},
 	"files": [
 		"src/index.ts"
