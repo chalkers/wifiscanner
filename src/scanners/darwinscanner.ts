@@ -7,8 +7,8 @@ export default class DarwinWifiScanner extends WifiScanner {
 
     constructor(public options: WifiScannerOptions) {
         super(options);
-        options.binaryPath = options.binaryPath || "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport";
-        options.args = options.args || "-s";
+        this.options.binaryPath = this.options.binaryPath || "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport";
+        this.options.args = this.options.args || "-s";
     }
 
     parse(data): Array<WirelessNetwork> {
