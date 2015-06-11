@@ -1,9 +1,9 @@
 /// <reference path="../typings/node/node.d.ts" />
-/// <reference path="interfaces/platformscanner.ts" />
+
 var childProcess = require("child_process");
 
 export default class WifiScanner implements PlatformScanner {
-	constructor(public options) {
+	constructor(public options: WifiScannerOptions) {
         this.options = options || {};
 	}	
 	scan(callback, standardErrorCallback) {

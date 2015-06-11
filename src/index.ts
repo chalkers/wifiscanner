@@ -1,9 +1,10 @@
 /// <reference path="../typings/node/node.d.ts" />
+///<reference path="interfaces.ts"/>
 
 import DarwinWifiScanner from "./darwinscanner"
 import LinuxWifiScanner from "./linuxscanner"
 
-function platform(options): string {
+function platformSelect(options): string {
     var platform: string;
     if(options && options.platform) {
         platform = options.platform;
@@ -12,10 +13,10 @@ function platform(options): string {
     return platform || process.platform;
 }
 
-export = function wifiscanner(options) {
+export = function wifiscanner(options): PlatformScanner {
     
     var platformScanner;
-    switch(platform(options)) {
+    switch(platformSelect(options)) {
         case "linux":
             platformScanner = LinuxWifiScanner;
         break;        
