@@ -2,20 +2,32 @@
 /// <reference path="interfaces/platformscanner.ts" />
 var childProcess = require("child_process");
 
-export default class WifiScanner {
-	constructor(public platformScanner: PlatformScanner) {
-		
+export default class WifiScanner implements PlatformScanner {
+	constructor(public options) {
+        this.options = options || {};
 	}	
 	scan(callback, standardErrorCallback) {
         childProcess.exec(this.command,  (error, standardOut, standardError) => {
             if (typeof standardErrorCallback === "function" && standardError) {
                 standardErrorCallback(standardError);
             }
-            callback(error, this.platformScanner.parse(standardOut.toString()));
+            callback(error, this.parse(standardOut.toString()));
         });
     }
 	
 	get command() {
-		return this.platformScanner.binaryPath + " " + this.platformScanner.args;
-	}	
+		return this.binaryPath + " " + this.args;
+	}
+
+    get binaryPath() {
+        return this.options.binaryPath;
+    }
+
+    get args() {
+        return this.options.args;
+    }
+
+    parse(data) {
+        return [];
+    }
 }

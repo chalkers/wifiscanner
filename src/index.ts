@@ -1,6 +1,5 @@
 /// <reference path="../typings/node/node.d.ts" />
 
-import WifiScanner from "./wifiscanner";
 import DarwinWifiScanner from "./darwinscanner"
 import LinuxWifiScanner from "./linuxscanner"
 
@@ -28,7 +27,5 @@ export = function wifiscanner(options) {
         break;
     }
     
-    var scanner = new platformScanner(options);
-    
-    return new WifiScanner(scanner);
+    return new platformScanner(options);
 }
