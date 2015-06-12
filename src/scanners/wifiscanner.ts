@@ -22,8 +22,7 @@ export default class WifiScanner {
 		return this.options.binaryPath + " " + this.options.args;
 	}
 
-    parse(data): wifiscanner.IWirelessNetwork[] {
-
+    parse(data: string): wifiscanner.IWirelessNetwork[] {
         return this.parser(data);
     }
 }
