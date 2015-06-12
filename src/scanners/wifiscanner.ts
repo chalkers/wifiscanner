@@ -1,7 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 
 import wifiscanner = require("wifiscanner");
-var childProcess = require("child_process");
+import childProcess = require("child_process");
 
 export default class WifiScanner {
 	
