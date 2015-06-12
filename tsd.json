@@ -7,6 +7,9 @@
   "installed": {
     "node/node.d.ts": {
       "commit": "f0aa5507070dc74859b636bd2dac37f3e8cab8d1"
+    },
+    "nconf/nconf.d.ts": {
+      "commit": "066819c65ff561ca109955e0b725c253e243f0a2"
     }
   }
 }

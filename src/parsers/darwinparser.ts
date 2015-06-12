@@ -2,7 +2,7 @@
 
 import wifiscanner = require("wifiscanner");
 
-export default function parse(data) {
+export default function parse(data): wifiscanner.IWirelessNetwork[] {
     var lines = data.split("\n");
     var headers = lines.shift();
     var indexOfMacAddress = headers.indexOf("BSSID");

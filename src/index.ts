@@ -1,8 +1,9 @@
 /// <reference path="../typings/tsd.d.ts"/>
-
+import nconf = require("nconf");
 import wifiscanner = require("wifiscanner");
-import DarwinWifiScanner from "./scanners/darwinscanner"
-import LinuxWifiScanner from "./scanners/linuxscanner"
+import Scanner from "./scanners/wifiscanner"
+import darwinparser from "./parsers/darwinparser"
+import linuxparser from "./parsers/linuxparser"
 
 function platformSelect(options): string {
     var platform: string;
@@ -13,20 +14,28 @@ function platformSelect(options): string {
     return platform || process.platform;
 }
 
-export = function(options): wifiscanner.IWifiScannerOptions {
+export = function(options: wifiscanner.IWifiScannerOptionsWithPlatform): Scanner {
+    options = options || {}
+    var platform = platformSelect(options);
+    nconf.file(`${__dirname}/../config/${platform}.json`);
     
-    var platformScanner;
-    switch(platformSelect(options)) {
+    var platformScanner: (data:string) => wifiscanner.IWirelessNetwork[];
+    switch(platform) {
         case "linux":
-            platformScanner = LinuxWifiScanner;
+            platformScanner = linuxparser;
         break;        
         case "darwin":
-            platformScanner = DarwinWifiScanner;
+            platformScanner = darwinparser;
         break;
         case "windows":
         //TODO implement this
         break;
     }
     
-    return new platformScanner(options);
+    var scannerOptions: wifiscanner.IWifiScannerOptions = {
+        binaryPath: options.binaryPath || nconf.get("binaryPath"),
+        args: options.args || nconf.get("args"),
+    }
+    
+    return new Scanner(scannerOptions, platformScanner);
 };

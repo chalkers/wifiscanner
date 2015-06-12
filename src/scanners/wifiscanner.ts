@@ -3,11 +3,12 @@
 import wifiscanner = require("wifiscanner");
 var childProcess = require("child_process");
 
-export default class WifiScanner implements wifiscanner.IPlatformScanner {
-	options: wifiscanner.IWifiScannerOptions;
-    constructor(options: wifiscanner.IWifiScannerOptions) {
-        this.options = options || {};
+export default class WifiScanner {
+	
+    constructor(public options: wifiscanner.IWifiScannerOptions, private parser) {
+
 	}	
+    
 	scan(callback, standardErrorCallback) {
         childProcess.exec(this.command,  (error, standardOut, standardError) => {
             if (standardError && typeof standardErrorCallback === "function") {
@@ -21,8 +22,8 @@ export default class WifiScanner implements wifiscanner.IPlatformScanner {
 		return this.options.binaryPath + " " + this.options.args;
 	}
 
-    parse(data) {
-        throw Error("Please override this in 'subclass'.");
-        return [];
+    parse(data): wifiscanner.IWirelessNetwork[] {
+
+        return this.parser(data);
     }
 }

@@ -1,8 +1,6 @@
 var assert = require("chai").assert;
 
-var wifiscanner = require("../lib/"),
-    DarwinWifiScanner = require("../lib/scanners/darwinscanner").default,
-    LinuxWifiScanner = require("../lib/scanners/linuxscanner").default;
+var wifiscanner = require("../lib/");
 
 var NETWORKS = [
     {   ssid: 'ACLCICHCGC',
@@ -55,8 +53,6 @@ describe("WifiScanner", function(){
         it("on a mac", function(done){
             var scanner = wifiscanner({platform: "darwin", args:"./test/darwin.txt", binaryPath: "cat"});
 
-            assert.isTrue(scanner instanceof DarwinWifiScanner, "Scanner returned by wifiscanner should be a DawrinWifiScanner");
-
             scanner.scan(function(error, networks) {
                 crossPlatformTest(error, networks, done)
             });
@@ -64,8 +60,6 @@ describe("WifiScanner", function(){
 
         it("on a linux", function(done){
             var scanner = wifiscanner({platform: "linux", args:"./test/linux.stdout.txt", binaryPath: "cat"});
-
-            assert.isTrue(scanner instanceof LinuxWifiScanner, "Scanner returned by wifiscanner should be a DawrinWifiScanner");
 
             scanner.scan(function(error, networks) {
                 crossPlatformTest(error, networks, done)

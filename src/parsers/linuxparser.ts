@@ -2,7 +2,7 @@
 
 import wifiscanner = require("wifiscanner");
 
-export default function parse(data) {
+export default function parse(data): wifiscanner.IWirelessNetwork[] {
     var cells = data.split(/Cell \d{2} - /g);
     if(~cells[0].toLocaleLowerCase().indexOf("scan complete")) {
         cells.shift();

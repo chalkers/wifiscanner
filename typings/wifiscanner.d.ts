@@ -1,12 +1,14 @@
 declare module "wifiscanner" {
     module wifiscanner {
-        interface IWifiScannerOptions {
+        interface IWifiScannerOptionsWithPlatform{
             binaryPath?: string,
-            args?: string
+            args?: string,
+            platform?: string
         }
         
-        interface IPlatformScanner {
-            parse: (data: string) => IWirelessNetwork[];
+        interface IWifiScannerOptions {
+            binaryPath: string,
+            args: string
         }
         
         interface IWirelessNetwork {
