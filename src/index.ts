@@ -1,6 +1,6 @@
-/// <reference path="../typings/node/node.d.ts" />
-///<reference path="interfaces.ts"/>
+/// <reference path="../typings/tsd.d.ts"/>
 
+import wifiscanner = require("wifiscanner");
 import DarwinWifiScanner from "./scanners/darwinscanner"
 import LinuxWifiScanner from "./scanners/linuxscanner"
 
@@ -13,7 +13,7 @@ function platformSelect(options): string {
     return platform || process.platform;
 }
 
-export = function wifiscanner(options): PlatformScanner {
+export = function(options): wifiscanner.IWifiScannerOptions {
     
     var platformScanner;
     switch(platformSelect(options)) {
@@ -29,4 +29,4 @@ export = function wifiscanner(options): PlatformScanner {
     }
     
     return new platformScanner(options);
-}
+};

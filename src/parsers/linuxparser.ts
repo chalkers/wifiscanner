@@ -1,3 +1,7 @@
+/// <reference path="../../typings/tsd.d.ts" />
+
+import wifiscanner = require("wifiscanner");
+
 export default function parse(data) {
     var cells = data.split(/Cell \d{2} - /g);
     if(~cells[0].toLocaleLowerCase().indexOf("scan complete")) {
@@ -11,7 +15,7 @@ function cleanCellLine(cellLine) {
     return cellLine.trim();
 }
 
-function parseCell(cell): WirelessNetwork {
+function parseCell(cell): wifiscanner.IWirelessNetwork {
     var cellLines = cell.split("\n").map(cleanCellLine);
 
     return {

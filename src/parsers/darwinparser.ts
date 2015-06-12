@@ -1,3 +1,7 @@
+/// <reference path="../../typings/tsd.d.ts" />
+
+import wifiscanner = require("wifiscanner");
+
 export default function parse(data) {
     var lines = data.split("\n");
     var headers = lines.shift();
@@ -20,7 +24,7 @@ function filterBlanks(line) {
     return line.replace(/\s+/g,"").length !== 0;
 }
 
-function parseLine(line, indexOfMacAddress): WirelessNetwork {
+function parseLine(line, indexOfMacAddress): wifiscanner.IWirelessNetwork {
     var ssid = line.substr(0, indexOfMacAddress).trim();
     line = line.substr(indexOfMacAddress, line.length - indexOfMacAddress);
 
