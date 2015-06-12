@@ -1,7 +1,7 @@
 /// <reference path="../typings/tsd.d.ts"/>
 import nconf = require("nconf");
 import wifiscanner = require("wifiscanner");
-import Scanner from "./scanners/wifiscanner"
+import WiFiScanner from "./scanners/wifiscanner"
 import darwinparser from "./parsers/darwinparser"
 import linuxparser from "./parsers/linuxparser"
 
@@ -14,21 +14,21 @@ function platformSelect(options): string {
     return platform || process.platform;
 }
 
-export = function(options: wifiscanner.IWifiScannerOptionsWithPlatform): Scanner {
+function scanner(options: wifiscanner.IWifiScannerOptionsWithPlatform): WiFiScanner {
     options = options || {}
     var platform = platformSelect(options);
     nconf.file(`${__dirname}/../config/${platform}.json`);
     
-    var platformScanner: (data:string) => wifiscanner.IWirelessNetwork[];
+    var parser: (data:string) => wifiscanner.IWirelessNetwork[];
     switch(platform) {
         case "linux":
-            platformScanner = linuxparser;
+            parser = linuxparser;
         break;        
         case "darwin":
-            platformScanner = darwinparser;
+            parser = darwinparser;
         break;
         case "windows":
-        //TODO implement this
+            //TODO implement this
         break;
     }
     
@@ -37,5 +37,7 @@ export = function(options: wifiscanner.IWifiScannerOptionsWithPlatform): Scanner
         args: options.args || nconf.get("args"),
     }
     
-    return new Scanner(scannerOptions, platformScanner);
+    return new WiFiScanner(scannerOptions, parser);
 };
+
+export = scanner;
