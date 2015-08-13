@@ -19,7 +19,7 @@
     "pretest": "tsc",
     "test": "mocha test",
     "test:coverage": "./node_modules/.bin/istanbul cover _mocha",
-    "postinstall": "tsd reinstall && tsc"
+    "postinstall": "tsd update && tsc"
   },
   "dependencies": {
     "nconf": "^0.7.1",
