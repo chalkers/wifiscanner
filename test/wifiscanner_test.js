@@ -41,7 +41,7 @@ function sortBySSIDs(network,otherNetowrk) {
     else return 0;
 }
 
-function crossPlatformTest(error, networks, done) {
+function crossPlatformTest(networks, done) {
     assert.isArray(networks, "should be an array");
     assert.lengthOf(networks, 7, "The networks array should be 7 in length");
     assert.deepEqual(networks.sort(sortBySSIDs), NETWORKS.sort(sortBySSIDs), "Networks were not as expected");
@@ -53,27 +53,47 @@ describe("WifiScanner", function(){
         it("on a mac", function(done){
             var scanner = wifiscanner({platform: "darwin", args:"./test/darwin.txt", binaryPath: "cat"});
 
-            scanner.scan(function(error, networks) {
-                crossPlatformTest(error, networks, done)
+            scanner.scan();
+            scanner.on("end", function(networks){
+                crossPlatformTest(networks, done);    
             });
         });
 
         it("on a linux", function(done){
             var scanner = wifiscanner({platform: "linux", args:"./test/linux.stdout.txt", binaryPath: "cat"});
 
-            scanner.scan(function(error, networks) {
-                crossPlatformTest(error, networks, done)
+            scanner.scan();
+            scanner.on("end", function(networks){
+                crossPlatformTest(networks, done);  
             });
         });
-
-        it("should handle standard errors", function(done){
+        
+        it("should error when command not present", function(done){
+            var scanner = wifiscanner({platform: "linux", binaryPath: "thiscommanddoesntexist"});
+            scanner.scan();
+            scanner.on("error", function(error){
+                assert.typeOf(error, 'error');
+                done();
+            });
+        });
+        
+        it("should handle standard errors as warnings", function(done){
             var scanner = wifiscanner({platform: "linux", binaryPath: "./test/iwlist_mock.js"});
-            scanner.scan(function(error, networks) {
 
-            }, function(standardError){
+            scanner.scan();
+            scanner.on("warning", function(standardError){
                 assert.typeOf(standardError, 'string');
                 done();
             });
         });
+        
+        it("should be chainable", function(done){
+            var scanner = wifiscanner({platform: "linux", args:"./test/linux.stdout.txt", binaryPath: "cat"});
+
+            scanner.scan().on("end", function(networks){
+                crossPlatformTest(networks, done);
+            });
+        });
+        
     });
 });
