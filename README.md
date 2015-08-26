@@ -16,7 +16,7 @@ npm install wifiscanner
 
 1. Require `wifiscanner`
 2. Create an instance of a `scanner`
-3. Call `scan` with a callback with two parameters
+3. Call `scan` and listen for events.
 4. Profit?
 
 ```javascript
@@ -25,22 +25,24 @@ var wifiscanner = require("wifiscanner");
 //Returns appropriate instance of a wifi scanner
 var scanner = wifiscanner();
 
-scanner.scan(function(error, networks){
-    if(error) {
-        console.error(error);
-    } else {
-        console.dir(networks);
-    }
-});
+scanner.scan();
+
+scanner.on("end", endHandler);
+scanner.on("error", errorHandler);
+
+//Optional 
+scanner.on("warning", warningHandler);
 
 ```
 
-Network is an `Array` of nearby networks. Each network will have the following keys:
+### The `"end"` Event
 
-* ssid
-* mac
-* channel
-* security (`Array` e.g `[ 'WPA', 'WPA2' ]`)
+The `endHandler` is a `Function` with one parameter, an `Array` of nearby networks. Each network will have the following keys:
+
+* `ssid`
+* `mac`
+* `channel`
+* `security` (`Array` e.g `[ 'WPA', 'WPA2' ]`)
 
 
 ### JSON Sample Output
@@ -86,38 +88,16 @@ Network is an `Array` of nearby networks. Each network will have the following k
 ]
 ```
 
-## Less Basic Usage
+### The `"error"` Event
 
-### Custom binaries and arguments
-
-You can specify binary (`binaryPath`) and arguments (`args`) in a set of `options`.
-
-```javascript
-var wifiscanner = require("wifiscanner");
+The `errorHandler` is a `Function` and has one parameter, an `Error` that comes from node.js's 
+[`child_process.exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback) method call.
 
 
-//Options
-var options = {
-    args: "wlan2 scan",
-    binaryPath: "/path/to/iwlist"
-}
+### The `"Warning"` Event
 
-var scanner = wifiscanner(options);
-
-scanner.scan(function(error, networks){
-    if(error) {
-        console.error(error);
-    } else {
-        console.dir(networks);
-    }
-});
-
-```
-
-### Handling stderr
-
-Standard error can is more of a warning. For example, if you're on Linux with `wlan0`, `en0` and `lo`
-and you run the `iwlist scan` command you get both the `stdout` of the networks on the `wlan0` network interface
+When you run a command line application, like `wifiscanner` does under the hood, a string of text may get printed out in to "Standard Error" or `stderr`. Standard error is more of a warning than a full blown error.
+For example, if you're on Linux with `wlan0`, `en0` and `lo` and you run the `iwlist scan` command you get both the `stdout` of the networks on the `wlan0` network interface
 (which is parsed in to the `networks` `Array`) and the `stderr` of:
 
 ```
@@ -126,8 +106,19 @@ lo        Interface doesn't support scanning.
 eth0      Interface doesn't support scanning.
 ```
 
-The default behavior from this module is to do nothing. However, you can pass in a second _optional_ callback to the
-`scan` method and do what you want with it.
+The default behavior from this package is to emit a `"warning"` event to be handled by a `Function` like so:
+
+```javascript
+scanner.on("warning", warningHandler);
+```
+
+It takes one parameter which is the `String` from `stderr`. Feel free to ignore the warnings depending on your needs.
+
+## Less Basic Usage
+
+### Custom binaries and arguments
+
+You can specify binary (`binaryPath`) and arguments (`args`) in a set of `options`. 
 
 ```javascript
 var wifiscanner = require("wifiscanner");
@@ -141,11 +132,7 @@ var options = {
 
 var scanner = wifiscanner(options);
 
-scanner.scan(function(error, networks){
-    //...
-}, function(standardError){
-    console.error(standardError);
-});
+scanner.scan().on("end", console.dir).on("error", console.error);
 
 ```
 
