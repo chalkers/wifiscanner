@@ -10,7 +10,6 @@ export default function parse(data): wifiscanner.IWirelessNetwork[] {
     return cells.map(parseCell);
 }
 
-
 function cleanCellLine(cellLine) {
     return cellLine.trim();
 }

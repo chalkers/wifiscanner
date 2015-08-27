@@ -50,24 +50,33 @@ function crossPlatformTest(networks, done) {
 
 describe("WifiScanner", function(){
     describe("scan", function() {
-        it("on a mac", function(done){
+        it("on mac", function(done){
             var scanner = wifiscanner({platform: "darwin", args:"./test/darwin.txt", binaryPath: "cat"});
 
             scanner.scan();
             scanner.on("end", function(networks){
-                crossPlatformTest(networks, done);    
+                crossPlatformTest(networks, done);
             });
         });
 
-        it("on a linux", function(done){
+        it("on linux", function(done){
             var scanner = wifiscanner({platform: "linux", args:"./test/linux.stdout.txt", binaryPath: "cat"});
 
             scanner.scan();
             scanner.on("end", function(networks){
-                crossPlatformTest(networks, done);  
+                crossPlatformTest(networks, done);
             });
         });
-        
+
+        it("on windows", function(done){
+            var scanner = wifiscanner({platform: "windows", args:"./test/windows.txt", binaryPath: "cat"});
+
+            scanner.scan();
+            scanner.on("end", function(networks){
+                crossPlatformTest(networks, done);
+            });
+        });
+
         it("should error when command not present", function(done){
             var scanner = wifiscanner({platform: "linux", binaryPath: "thiscommanddoesntexist"});
             scanner.scan();
@@ -76,7 +85,7 @@ describe("WifiScanner", function(){
                 done();
             });
         });
-        
+
         it("should handle standard errors as warnings", function(done){
             var scanner = wifiscanner({platform: "linux", binaryPath: "./test/iwlist_mock.js"});
 
@@ -86,7 +95,7 @@ describe("WifiScanner", function(){
                 done();
             });
         });
-        
+
         it("should be chainable", function(done){
             var scanner = wifiscanner({platform: "linux", args:"./test/linux.stdout.txt", binaryPath: "cat"});
 
@@ -94,6 +103,6 @@ describe("WifiScanner", function(){
                 crossPlatformTest(networks, done);
             });
         });
-        
+
     });
 });

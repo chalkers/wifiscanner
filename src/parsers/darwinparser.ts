@@ -19,7 +19,6 @@ function cleanSecurity(security) {
     }
 }
 
-
 function filterBlanks(line) {
     return line.replace(/\s+/g,"").length !== 0;
 }
