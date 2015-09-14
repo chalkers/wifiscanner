@@ -16,10 +16,11 @@
     "node": ">=0.10"
   },
   "scripts": {
-    "pretest": "tsc",
+    "build": "tsd update && tsc",
+    "pretest": "npm run build",
     "test": "mocha test",
-    "test:coverage": "./node_modules/.bin/istanbul cover _mocha",
-    "postinstall": "tsd update && tsc"
+    "test:coverage": "istanbul cover _mocha",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "nconf": "^0.7.1",
