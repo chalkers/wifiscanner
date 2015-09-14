@@ -16,33 +16,33 @@ function platformSelect(options): string {
 }
 
 function scanner(options: wifiscanner.IWifiScannerOptionsWithPlatform): WiFiScanner {
-    options = options || {}
+    options = options || {};
     var platform = platformSelect(options);
     nconf.file(`${__dirname}/../config/${platform}.json`);
-    
+
     var parser: (data:string) => wifiscanner.IWirelessNetwork[];
     switch(platform) {
         case "linux":
             parser = linuxparser;
-        break;        
+            break;
         case "darwin":
             parser = darwinparser;
-        break;
+            break;
         case "windows":
             parser = windowsparser;
-        break;
+            break;
     }
-    
+
     //If Windows is on another drive, or pick C:\Windows by default.
     //Darwin and Linux don't have a {{SystemRoot}} variable in their configuration file.
     let systemRoot =  process.env.SystemRoot || "C:\\Windows";
-    
+
     let scannerOptions: wifiscanner.IWifiScannerOptions = {
         binaryPath: options.binaryPath || nconf.get("binaryPath").replace("{{SystemRoot}}", systemRoot),
         args: options.args || nconf.get("args"),
-    }
-    
+    };
+
     return new WiFiScanner(scannerOptions, parser);
-};
+}
 
 export = scanner;

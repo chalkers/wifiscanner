@@ -1,0 +1,4 @@
+{
+	"binaryPath": "{{SystemPath}}\\System32\\netsh.exe",
+	"args": "wlan show networks mode=Bssid"
+}

@@ -17,4 +17,12 @@ describe("Config files", function(){
             assert.equal(nconf.get("args"),"-s");
         });
     });
+
+    describe("windows", function(){
+        it("should contain the correct default configuration for platform", function(){
+            nconf.file(__dirname + "/../config/windows.json");
+            assert.equal(nconf.get("binaryPath"),"{{SystemPath}}\\System32\\netsh.exe");
+            assert.equal(nconf.get("args"),"wlan show networks mode=Bssid");
+        });
+    });
 });
